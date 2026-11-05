@@ -33,25 +33,25 @@ const projects = {
     ]
   },
   approval: {
-    kicker: "PAYMENT CONTROLS · APPROVAL",
-    title: "Payment File & Supplier Bank Detail Approval",
-    intro: "Developed custom SAP ByD business objects and internal communication logic to support controlled approval processes for payment files and supplier bank details.",
+    kicker: "SUPPLIER MASTER · CUSTOM APPROVAL",
+    title: "Supplier Bank Detail Approval Workflow",
+    intro: "Implemented a custom approval process for supplier bank-detail changes in SAP Business ByDesign, addressing a process gap where a standard approval flow was not available for the required scenario.",
     blocks: [
-      ["Business context", "The process needed additional control and visibility before selected payment-related changes or files could proceed."],
-      ["My contribution", ["Designed and developed custom business objects for the approval process.", "Implemented application-to-application (A2A) internal communication between relevant objects.", "Built supporting validation and process logic in ABSL.", "Worked through record-creation and multi-record processing scenarios."]],
-      ["Solution flow", "Business event / request → custom BO → validation and approval workflow → status / downstream processing."],
-      ["Technologies", ["SAP ByD SDK", "ABSL", "Custom Business Objects", "A2A Internal Communication"]]
+      ["Business context", "Changes to supplier bank details needed a controlled review before the updated information could be accepted."],
+      ["My contribution", ["Designed and developed a custom approval process in SAP Business ByDesign.", "Created supporting custom business object logic to capture and manage bank-detail change requests.", "Implemented email notifications to inform designated approvers about pending changes and request their approval.", "Supported approval status tracking and process handling."]],
+      ["Solution flow", "Supplier bank-detail change → custom approval request → email notification to approver → approval decision → status update / controlled completion."],
+      ["Technologies", ["SAP ByD SDK", "ABSL", "Custom Business Objects", "Email notifications", "Approval logic"]]
     ]
   },
   btp: {
-    kicker: "WORKFLOW · PLATFORM INTEGRATION",
-    title: "BTP Process Automation Integration",
-    intro: "Worked on integration scenarios connecting SAP BTP Build Process Automation workflows with SAP Business ByDesign to support cross-platform business processes.",
+    kicker: "SUPPLIER ONBOARDING · WORKFLOW AUTOMATION",
+    title: "Supplier Portal & Onboarding Automation",
+    intro: "Designed a supplier onboarding workflow using SAP Build Process Automation, SAP CPI and SAP Business ByDesign.",
     blocks: [
-      ["Business context", "Business workflows can span the ERP and platform automation layers. The integration approach connects process steps and relevant business data between SAP applications."],
-      ["My contribution", ["Worked on integration scenarios between SAP BTP Build Process Automation and SAP Business ByDesign.", "Supported service and API-based connectivity patterns.", "Considered payload structure, process hand-offs and response handling.", "Collaborated across technical and functional requirements."]],
-      ["Solution flow", "SAP BTP Build Process Automation ↔ service / API integration ↔ SAP Business ByDesign."],
-      ["Technologies", ["SAP BTP", "Build Process Automation", "SAP Business ByDesign", "APIs", "Integration concepts"]]
+      ["Business context", "Supplier onboarding required a structured request, controlled approvals and reliable creation of supplier master data in SAP Business ByDesign."],
+      ["My contribution", ["Designed interactive supplier request forms in SAP Build Process Automation.", "Configured a three-level approval hierarchy.", "Integrated final approval events with SAP CPI iFlows.", "Used CPI to validate and transform the approved supplier data before creating Supplier Master data in SAP ByD through web services.", "Implemented workflow monitoring, audit trails, status tracking and error handling."]],
+      ["Solution flow", "Supplier request form → SAP Build Process Automation → three-level approval → SAP CPI iFlow → SAP ByD Supplier Master creation."],
+      ["Technologies", ["SAP BTP Build Process Automation", "SAP CPI", "SAP Business ByDesign", "Web Services", "Payload validation and transformation"]]
     ]
   },
   jev: {
@@ -63,6 +63,61 @@ const projects = {
       ["My contribution", ["Worked on the technical and functional understanding of the reversal requirement.", "Considered automation of manual JV reversal scenarios.", "Included line-item-level Sub-POD maintenance in the process design.", "Contributed to the custom BO and automation approach documentation."]],
       ["Solution flow", "Eligible manual JV → validation and reversal logic → reversal document → line-level Sub-POD maintenance."],
       ["Technologies", ["SAP Business ByDesign", "Custom BO design", "ABSL", "Finance process automation"]]
+    ]
+  },
+  h2h: {
+    kicker: "HOST-TO-HOST · BANK CONNECTIVITY",
+    title: "Scheduled Bank Payment File Integration",
+    intro: "Implemented a scheduled SAP CPI integration to retrieve payment files from SAP Business ByDesign and deliver them to a bank through SFTP.",
+    blocks: [
+      ["Business context", "The bank required payment files from SAP ByD to be transferred through a host-to-host channel on a daily schedule."],
+      ["My contribution", ["Configured a scheduled CPI integration to run once per day.", "Connected to SAP ByD to retrieve the payment file.", "Configured secure SFTP delivery to the bank endpoint.", "Worked on integration monitoring and exception handling for the file-transfer process."]],
+      ["Solution flow", "CPI scheduler → SAP ByD payment-file retrieval → file handling → bank SFTP endpoint."],
+      ["Technologies", ["SAP Integration Suite (CPI)", "Scheduler", "SFTP", "SAP Business ByDesign", "Integration monitoring"]]
+    ]
+  },
+  vehicle: {
+    kicker: "CUSTOM APPLICATION · S/4HANA INTEGRATION",
+    title: "Vehicle Requirement to Sales Order Integration",
+    intro: "Integrated a CAP and Fiori-based custom application with SAP S/4HANA using SAP CPI to process vehicle requirements and create sales orders.",
+    blocks: [
+      ["Business context", "Vehicle requirements are captured and maintained in a custom application. The business process required those requirements to be transferred to SAP S/4HANA and converted into sales orders."],
+      ["My contribution", ["Worked on the SAP CPI integration between the CAP / Fiori application and SAP S/4HANA.", "Processed vehicle requirement data submitted from the custom application.", "Configured the integration flow to map and pass the requirement data to S/4HANA.", "Supported sales order creation and integration response handling."]],
+      ["Solution flow", "CAP / Fiori vehicle request application → SAP CPI iFlow → SAP S/4HANA → Sales Order creation."],
+      ["Technologies", ["SAP Integration Suite (CPI)", "SAP CAP", "SAP Fiori", "SAP S/4HANA", "API integration"]]
+    ]
+  },
+  surcharge: {
+    kicker: "INVOICE CUSTOMIZATION · RECHARGE PROCESS",
+    title: "Invoice Surcharge / Recharge",
+    intro: "Developed a custom SAP Business ByDesign process to recharge customers for raw-material purchase costs using supplier invoice information as the basis.",
+    blocks: [
+      ["Business context", "The business needed to recover relevant raw-material purchase costs from customers through a customer invoice request while retaining a link to the supplier invoice details."],
+      ["My contribution", ["Created a custom business object named Invoice Recharge.", "Implemented logic to fetch and display the relevant supplier invoice details in the custom BO.", "Enabled users to enter the required recharge information alongside the supplier invoice details.", "Added an action button to create a customer invoice request from the Invoice Recharge BO.", "Supported the process of combining the generated request with the customer's original invoice request so the items could be consolidated into one invoice request."]],
+      ["Solution flow", "Supplier invoice → Invoice Recharge custom BO → user enters recharge details → create additional customer invoice request → combine with original customer invoice request → one consolidated invoice request."],
+      ["Technologies", ["SAP Business ByDesign SDK", "ABSL", "Custom Business Object", "Invoice Request processing"]]
+    ]
+  },
+  warehouse: {
+    kicker: "WAREHOUSE OPERATIONS · DOCUMENT CUSTOMIZATION",
+    title: "Warehouse Task Notification & Forms",
+    intro: "Developed customized warehouse forms and automated email notifications to inform warehouse teams when inbound or outbound tasks are created in SAP Business ByDesign.",
+    blocks: [
+      ["Business context", "Warehouse teams needed timely notification of newly created tasks, along with task-specific documents to support picking and put-away activities."],
+      ["My contribution", ["Developed a custom form for warehouse operations.", "Implemented email generation when inbound and outbound warehouse tasks are created.", "Included the relevant custom Pick List or Put-away form in the notification email.", "Supported a process that gives warehouse users the task information and documents needed to carry out the activity."]],
+      ["Solution flow", "Inbound / outbound warehouse task created → email notification generated → corresponding Pick List / Put-away form attached → warehouse team notified."],
+      ["Technologies", ["SAP Business ByDesign SDK", "Form customization", "Email generation", "Warehouse task events"]]
+    ]
+  },
+  bankformat: {
+    kicker: "PAYMENT FILE · XSLT CUSTOMIZATION",
+    title: "HSBC & Barclays Payment File Formats",
+    intro: "Customized SAP Business ByDesign payment-file transformations to generate bank-compatible XML output for HSBC and Barclays.",
+    blocks: [
+      ["Business context", "The banks required payment files to follow their respective XML structures. The standard output needed transformation to match each bank's format requirements."],
+      ["My contribution", ["Reviewed the required bank-specific XML structures.", "Customized the XSLT transformation used for payment-file generation.", "Mapped SAP ByD payment data into the required HSBC and Barclays XML elements and structure.", "Supported validation of the generated output against the expected bank format."]],
+      ["Solution flow", "SAP ByD payment data → payment-file generation → bank-specific XSLT transformation → HSBC / Barclays XML format."],
+      ["Technologies", ["SAP Business ByDesign", "XSLT", "XML", "Payment file configuration", "HSBC / Barclays formats"]]
     ]
   }
 };
